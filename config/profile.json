@@ -1,0 +1,158 @@
+{
+    "profile/model": {
+        "entities": {
+            "user": { "table": "user", "foreignKey": "user_id", "foreignEntity": "profile" }
+        },
+        "properties": {
+            "id": { "entity": "profile", "column": "id", "type": "primary" },
+            "n_first": { "entity": "profile", "column": "n_first" },
+            "n_last": { "entity": "profile", "column": "n_last" },
+            "n_fn": { "entity": "profile", "column": "n_fn", "type": "CONCAT", "components": ["n_last", " ", "n_first"] },
+            "email": { "entity": "user", "column": "email" },
+            "equipe": { "entity": "profile", "column": "equipe" },
+            "role": { "entity": "profile", "column": "role" },
+
+            "creation_time": { "entity": "profile", "column": "creation_time", "type": "datetime" },
+            "creation_user": { "entity": "profile", "column": "creation_user", "type": "int" },
+            "update_time": { "entity": "profile", "column": "update_time", "type": "datetime" },
+            "update_user": { "entity": "profile", "column": "update_user", "type": "int" }
+       }
+    },
+
+    "profile/property/n_first": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "First name",
+            "fr_FR": "Prénom"
+        }
+    },
+
+    "profile/property/n_last": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Last name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "profile/property/n_fn": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "profile/property/email": {
+        "definition": "inline",
+        "type": "email",
+        "labels": {
+            "default": "Email",
+            "fr_FR": "Email"
+        }
+    },
+
+    "profile/property/equipe": {
+		"definition": "inline",
+		"type": "source",
+        "entity": "place",
+        "where": "status:new",
+        "order": "name",
+        "format": ["%s", "name"],
+		"labels": {
+			"default": "Campus"
+		}
+    },
+
+    "profile/property/role": {
+		"definition": "inline",
+        "type": "select",
+		"modalities": {
+            "commercial_financier": { "default": "Commercial et Financier" },
+            "operationnel_administratif": { "default": "Opérationnel (Administratif)" },
+            "operationnel_alternant": { "default": "Opérationnel (Alternant)" },
+            "operationnel_stagiaire": { "default": "Opérationnel (Stagiaire)" },
+            "manager": { "default": "Managérial, Commercial, Marketing et Financier" },
+            "super_admin": { "default": "Super Admin" }
+        },
+		"labels": {
+			"default": "Role"
+		}
+    },
+		
+	"profile/index/profile": {
+        "view": "renderIndexB5"
+    }, 
+
+	"profile/search/profile": { 
+        "view": "renderSearchB5",
+        "properties": { 
+            "n_fn": {},
+            "email": {},
+            "equipe": { "multiple": true },
+            "role": { "multiple": true }
+        }
+    },
+	
+	"profile/list/profile": { 
+        "view": "renderDataviewB5",
+        "properties": {
+            "n_fn": { "detailCaption": true },
+            "email": {},
+            "equipe": {},
+            "role": {}
+        }
+    },
+
+    "profile/detail/profile": {
+        "tabs": {
+            "contact_1": {
+                "definition": "inline",
+                "route": "/bo/update/profile",
+                "labels": {"en_US": "Update", "fr_FR": "Modifier"}
+            }
+        }
+    },
+
+	"profile/update/profile": {
+        "layout": {
+            "intro": {
+                "properties": ["n_first", "n_last", "email", "equipe", "role"]
+            }
+        },
+        "properties": {
+            "n_first": { "mandatory": true },
+            "n_last": { "mandatory": true },
+            "email": { "mandatory": true },
+            "equipe": { "mandatory": true },
+            "role": { "mandatory": true }
+        }
+    },
+
+    "profile/groupUpdate/profile": { 
+        "properties": {
+            "equipe": {},
+            "role": {}
+        }
+    },
+
+    "profile/export/profile": { 
+        "properties": { 
+            "n_fn": {},
+            "email": {},
+            "equipe": {},
+            "role": {}
+       }
+    },
+
+    "profile/v1/profile": {
+        "properties": {
+            "n_fn": {},
+            "equipe": {},
+            "role": {}
+        }
+    }
+}

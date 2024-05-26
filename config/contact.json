@@ -1,0 +1,20 @@
+{
+    "contact/model": {
+        "entities": {
+            "candidat": { "table": "candidat", "foreignKey": "candidat_id", "foreignEntity": "contact" },
+            "user": { "table": "user", "foreignKey": "creation_user", "foreignEntity": "contact" }
+        },
+        "properties": {
+            "id": { "entity": "contact", "column": "id", "type": "primary" },
+            "candidat_id": { "entity": "contact", "column": "candidat_id" },
+            "text": { "entity": "contact", "column": "text", "max_length": 65535 },
+
+            "creation_time": { "entity": "contact", "column": "creation_time", "type": "datetime" },
+            "creation_user": { "entity": "contact", "column": "creation_user", "type": "int" },
+            "user_n_fn": { "entity": "user", "column": "n_fn" },
+
+            "update_time": { "entity": "contact", "column": "update_time", "type": "datetime" },
+            "update_user": { "entity": "contact", "column": "update_user", "type": "int" }
+       }
+    }
+}

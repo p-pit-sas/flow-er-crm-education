@@ -1,0 +1,30 @@
+{
+    "vcard/model": {
+        "entities": {
+        },
+        "properties": {
+            "n_title": { "entity": "vcard", "column": "n_title" },
+            "n_first": { "entity": "vcard", "column": "n_first" },
+            "n_last": { "entity": "vcard", "column": "n_last" },
+            "n_fn": { "entity": "vcard", "column": "n_fn" },
+            "email": { "entity": "vcard", "column": "email" },
+            "tel_work": { "entity": "vcard", "column": "tel_work" },
+            "tel_cell": { "entity": "vcard", "column": "tel_cell" },
+            "adr_street": { "entity": "vcard", "column": "adr_street" },
+            "adr_extended": { "entity": "vcard", "column": "adr_extended" },
+            "adr_post_office_box": { "entity": "vcard", "column": "adr_post_office_box" },
+            "adr_zip": { "entity": "vcard", "column": "adr_zip" },
+            "adr_city": { "entity": "vcard", "column": "adr_city" },
+            "adr_state": { "entity": "vcard", "column": "adr_state" },
+            "adr_country": { "entity": "vcard", "column": "adr_country" },
+            "birth_date": { "entity": "vcard", "column": "birth_date", "type": "date" },
+            "gender": { "entity": "vcard", "column": "gender", "type": "int" },
+            "nationality": { "entity": "vcard", "column": "nationality", "type": "tinyint" },
+
+            "creation_time": { "entity": "vcard", "column": "creation_time", "type": "datetime" },
+            "creation_user": { "entity": "vcard", "column": "creation_user", "type": "int" },
+            "update_time": { "entity": "vcard", "column": "update_time", "type": "datetime" },
+            "update_user": { "entity": "vcard", "column": "update_user", "type": "int" }
+       }
+    }
+}

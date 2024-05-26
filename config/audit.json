@@ -1,0 +1,526 @@
+{
+    "audit/model": {
+        "entities": {
+            "candidat": { "table": "candidat", "foreignKey": "row_id", "foreignEntity": "audit" },
+            "place": { "table": "place", "foreignKey": "place_id", "foreignEntity": "candidat" },
+            "contact_1": { "table": "vcard", "foreignKey": "contact_1_id", "foreignEntity": "candidat" },
+            "profile": { "table": "profile", "foreignKey": "owner_id", "foreignEntity": "candidat" }
+        },
+        "properties": {
+            "id": { "entity": "audit", "column": "id", "type": "primary" },
+            "entity": { "entity": "audit", "column": "entity" },
+            "row_id": { "entity": "audit", "column": "row_id", "type": "int" },
+            "property": { "entity": "audit", "column": "property" },
+            "value": { "entity": "audit", "column": "value" },
+
+            "candidat_id": { "entity": "audit", "column": "row_id", "type": "int" },
+            "school": { "entity": "candidat", "column": "school" },
+            "place_id": { "entity": "candidat", "column": "place_id", "type": "int" },
+            "place_name": { "entity": "place", "column": "name" },
+            "school_year": { "entity": "candidat", "column": "school_year" },
+            "level": { "entity": "candidat", "column": "level" },
+            "origine": { "entity": "candidat", "column": "origine" },
+            "amount": { "entity": "candidat", "column": "amount", "type": "float" },
+            "owner_id": { "entity": "candidat", "column": "owner_id", "type": "int" },
+            "owner_n_first": { "entity": "profile", "column": "n_first" },
+            "owner_n_last": { "entity": "profile", "column": "n_last" },
+            "owner_n_fn": { "entity": "profile", "column": "owner_n_fn", "type": "CONCAT", "components": ["owner_n_last", " ", "owner_n_first"] },
+            "boarding_school": { "entity": "candidat", "column": "boarding_school" },
+            "identifier": { "entity": "candidat", "column": "identifier" },
+            "contact_1_id": { "entity": "candidat", "column": "contact_1_id", "type": "int" },
+            "n_first": { "entity": "contact_1", "column": "n_first" },
+            "n_last": { "entity": "contact_1", "column": "n_last" },
+            "n_fn": { "entity": "contact_1", "column": "n_fn", "type": "CONCAT", "components": ["n_last", " ", "n_first"] },
+            "email": { "entity": "contact_1", "column": "email" },
+            "tel_cell": { "entity": "contact_1", "column": "tel_cell" },
+
+            "creation_time": { "entity": "audit", "column": "creation_time", "type": "datetime" },
+            "creation_date": { "entity": "audit", "column": "creation_date", "type": "date" },
+            "creation_month": { "entity": "audit", "column": "creation_month" },
+            "creation_year": { "entity": "audit", "column": "creation_yeat" },
+            "creation_user": { "entity": "audit", "column": "creation_user", "type": "int" }
+       }
+    },
+
+    "audit/property/id": {
+        "definition": "inline",
+        "type": "id",
+        "labels": {
+            "default": "Audit id"
+        }
+    },
+
+    "audit/property/property": {
+		"definition": "inline",
+        "type": "select",
+		"modalities": {
+            "status": { "default": "Status", "fr_FR": "Statut" },
+            "origine": { "default": "Origine", "fr_FR": "Origine" },
+            "school": { "default": "School", "fr_FR": "École" },
+            "level": { "default": "Level to integrate", "fr_FR": "Niveau à intégrer" }
+        },
+		"labels": {
+			"default": "Property",
+			"fr_FR": "Propriété auditée"
+		}
+    },
+
+    "audit/property/value": {
+		"definition": "inline",
+        "type": "select",
+		"modalities": {
+            "new": { "default": "À contacter" },
+            "repondeur": { "default": "Répondeur" },
+            "a_relancer": { "default": "À relancer" },
+            "candidate": { "default": "Qualifié (Candidat)" },
+            "non_qualifie": { "default": "Non qualifié" },
+            "ne_plus_contacter": { "default": "Ne plus contacter" },
+            "black_liste": { "default": "Black listé" },
+            "nouvelle_candidature": { "default": "Nouvelle candidature" },
+            "entretien_programme": { "default": "Entretien d'admission programmé" },
+            "absent_entretien": { "default": "Absent à l'entretien d'admission" },
+            "entretien_termine": { "default": "Entretien d'admission terminé" },
+            "attente_dossier": { "default": "En attente du Dossier d'inscription" },
+            "dossier_en_verification": { "default": "Dossier d’inscription en cours de vérification" },
+            "attente_signature": { "default": "En attente de la signature du contrat" },
+            "contrat_signe": { "default": "Contrat signé" },
+            "inscrit_inital": { "default": "Inscrit Initial" },
+            "inscrit_sans_entreprise": { "default": "Inscrit sans entreprise" },
+            "inscrit_avec_entreprise": { "default": "Inscrit avec entreprise" },
+            "inscrit_sfp": { "default": "Inscrit SFP" },
+            "perdu": { "default": "Perdu" },
+
+            "web": { "default": "Web site", "fr_FR": "Site web" },
+            "incoming": { "default": "Incoming call", "fr_FR": "Appel entrant" },
+            "jpo": { "default": "Journée Porte Ouverte" },
+            "salon": { "default": "Salon" },
+            "facebook": { "default": "Facebook Ads" },
+            "google": { "default": "Google Ads" },
+            "tiktok": { "default": "Tiktok Ads" },
+            "file": { "default": "File", "fr_FR": "Fichier" },
+
+            "bts_mco": { "default": "BTS MCO - Management Commercial Opérationnel" },
+            "bts_ndrc": { "default": "BTS NDRC - Négociation et Digitalisation de la Relation Client" },
+            "bts_gpme": { "default": "BTS GPME - Gestion de la PME" },
+            "bts_com": { "default": "BTS COM - Communication" },
+            "dcg": { "default": "DCG - Diplôme de Comptabilité et Gestion" },
+            "bachelor_business_development": { "default": "Bachelor Business Development" },
+            "bachelor_marketing_com": { "default": "Bachelor Marketing et Communication" },
+            "bachelor_rh": { "default": "Bachelor Ressources Humaines" },
+            "mastere_business_management": { "default": "Mastère Business Management" },
+            "mastere_marketing_com": { "default": "Mastère Marketing et Communication" },
+            "mastere_rh": { "default": "Mastère Ressources Humaines" },
+            "mastere_juriste": { "default": "Mastère Juriste" },
+
+            "b1": { "fr_FR": "Bachelor 1" },
+            "b2": { "fr_FR": "Bachelor 2" },
+            "b3": { "fr_FR": "Bachelor 3" },
+            "m1": { "fr_FR": "Mastère 1" },
+            "m2": { "fr_FR": "Mastère 2" }
+        },
+		"labels": {
+			"default": "Value",
+			"fr_FR": "Valeur"
+		}
+    },
+
+    "audit/property/school": { 
+        "definition": "inline",
+        "type": "select",
+		"modalities": {
+            "bts_mco": { "default": "BTS MCO - Management Commercial Opérationnel" },
+            "bts_ndrc": { "default": "BTS NDRC - Négociation et Digitalisation de la Relation Client" },
+            "bts_gpme": { "default": "BTS GPME - Gestion de la PME" },
+            "bts_com": { "default": "BTS COM - Communication" },
+            "dcg": { "default": "DCG - Diplôme de Comptabilité et Gestion" },
+            "bachelor_business_development": { "default": "Bachelor Business Development" },
+            "bachelor_marketing_com": { "default": "Bachelor Marketing et Communication" },
+            "bachelor_rh": { "default": "Bachelor Ressources Humaines" },
+            "mastere_business_management": { "default": "Mastère Business Management" },
+            "mastere_marketing_com": { "default": "Mastère Marketing et Communication" },
+            "mastere_rh": { "default": "Mastère Ressources Humaines" },
+            "mastere_juriste": { "default": "Mastère Juriste" }
+		},
+		"labels": {
+			"default": "Formation"
+		}
+    },
+
+    "audit/property/place_id": {
+		"definition": "inline",
+		"type": "source",
+        "entity": "place",
+        "where": "status:new",
+        "order": "name",
+        "format": ["%s", "name"],
+		"labels": {
+			"default": "Place",
+			"fr_FR": "Campus"
+		}
+    },
+
+    "audit/property/place_name": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "Place",
+			"fr_FR": "Campus"
+		}
+    },
+
+    "audit/property/school_year": { 
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "2023-2024": { "default": "2023-2024" },
+            "2024-2025": { "default": "2024-2025" },
+            "2025-2026": { "default": "2025-2026" },
+            "2026-2027": { "default": "2026-2027" },
+            "2027-2028": { "default": "2027-2028" }
+        },
+		"labels": {
+			"default": "School year",
+			"fr_FR": "Année scolaire"
+		}
+    },
+
+    "audit/property/level": { 
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "b1": { "fr_FR": "Bachelor 1" },
+            "b2": { "fr_FR": "Bachelor 2" },
+            "b3": { "fr_FR": "Bachelor 3" },
+            "m1": { "fr_FR": "Mastère 1" },
+            "m2": { "fr_FR": "Mastère 2" }
+        },
+        "labels": {
+            "default": "Niveau à intégrer"
+        }
+    },
+
+    "audit/property/origine": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+                "web": { "default": "Web site", "fr_FR": "Site web" },
+                "incoming": { "default": "Incoming call", "fr_FR": "Appel entrant" },
+                "jpo": { "default": "Journée Porte Ouverte" },
+                "salon": { "default": "Salon" },
+                "facebook": { "default": "Facebook Ads" },
+                "google": { "default": "Google Ads" },
+                "tiktok": { "default": "Tiktok Ads" },
+                "file": { "default": "File", "fr_FR": "Fichier" }
+        },
+        "labels": {
+                "default": "Origine",
+                "fr_FR": "Origine"
+        }
+    },
+    
+    "audit/property/amount": {
+        "definition": "inline",
+        "type": "number",
+        "labels": {
+            "default": "Revenue",
+            "fr_FR": "CA"
+        }
+    },
+
+    "audit/property/boarding_school": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "externe": { "default": "Externe" },
+            "demi": { "default": "Demi-pensionnaire" },
+            "interne": { "default": "Internat" },
+            "weekend": { "default": "Internat + WE" }
+        },
+        "labels": {
+            "default": "Boarding-school",
+            "fr_FR": "Régime"
+        }
+    },
+
+    "audit/property/owner_id": {
+		"definition": "inline",
+		"type": "source",
+        "entity": "profile",
+        "view": "profile",
+        "where": "role:commercial_financier,operationnel_administratif,operationnel_alternant,operationnel_stagiaire",
+        "order": "n_fn",
+        "format": ["%s", "n_fn"],
+		"labels": {
+			"default": "Commercial affecté"
+		}
+    },
+
+    "audit/property/owner_n_fn": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Commercial affecté"
+        }
+    },
+
+    "audit/property/identifier": {
+		"definition": "inline",
+		"type": "input",
+		"labels": {
+			"default": "Identifier",
+			"fr_FR": "Identifiant"
+		}
+    },
+    
+    "audit/property/contact_1_id": {
+		"definition": "inline",
+		"type": "photo",
+		"labels": {
+			"default": "",
+			"fr_FR": ""
+		}
+    },
+
+    "audit/property/n_first": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "First name",
+            "fr_FR": "Prénom"
+        }
+    },
+
+    "audit/property/n_last": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Last name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "audit/property/n_fn": {
+        "definition": "inline",
+        "type": "input",
+        "labels": {
+            "default": "Name",
+            "fr_FR": "Nom"
+        }
+    },
+
+    "audit/property/email": {
+        "definition": "inline",
+        "type": "email",
+        "labels": {
+            "default": "Email",
+            "fr_FR": "Email"
+        }
+    },
+
+    "audit/property/tel_cell": {
+        "definition": "inline",
+        "type": "phone",
+        "labels": {
+            "default": "Cellular",
+            "fr_FR": "Mobile"
+        }
+    },
+
+    "audit/property/creation_time": {
+        "definition": "inline",
+        "type": "datetime",
+        "labels": {
+            "default": "Creation time",
+            "fr_FR": "Création"
+        }
+    },
+    	
+	"audit/index/auditStatus": {
+        "view": "renderIndexB5",
+        "restriction": "property:status"
+    }, 
+
+	"audit/search/auditStatus": { 
+        "view": "renderSearchB5",
+        "properties": { 
+            "property": { "multiple": true },
+            "value": {},
+            "school": { "multiple": true },
+            "place_id": { "multiple": true },
+            "school_year": { "multiple": true },
+            "level": { "multiple": true },
+            "owner_id": {},
+            "n_fn": {},
+            "email": {},
+            "tel_cell": {},
+            "origine": { "multiple": true }
+        }
+    },
+	
+	"audit/list/auditStatus": { 
+        "view": "renderDataviewB5",
+        "measure": "amount",
+        "properties": { 
+            "creation_time": {},
+            "property": { "restriction": ["status"] },
+            "value": {},
+            "school": {},
+            "school_year": { },
+            "level": {},
+            "amount": {}
+        }
+    },
+
+    "audit/detail/auditStatus": {
+        "tabs": {
+            "contact_1": {
+                "definition": "inline",
+                "route": "/bo/update/candidat",
+                "labels": {"en_US": "Update", "fr_FR": "Modifier"},
+                "key": "id"
+            },
+            "add": {
+                "definition": "inline",
+                "route": "/bo/add/candidat",
+                "labels": {"en_US": "Add", "fr_FR": "Ajouter"},
+                "key": false
+            }
+        }
+    },
+
+	"audit/update/auditStatus": {
+        "layout": {
+            "unique": {
+                "properties": ["status", "identifier", "opening_date", "callback_date", "subscription_date", "cancellation_date", "origine", "amount"]
+            }
+        },
+        "properties": {
+            "creation_time": { "readonly": true },
+            "property": { "readonly": true },
+            "value": { "readonly": true },
+            "school": { "readonly": true },
+            "place_name": { "readonly": true },
+            "school_year": { "readonly": true },
+            "level": { "readonly": true },
+            "owner_n_fn": { "readonly": true },
+            "identifier": { "readonly": true },
+            "origine": { "readonly": true },
+            "amount": { "readonly": true },
+            "n_fn": { "readonly": true },
+            "email": { "readonly": true },
+            "tel_cell": {}
+        }
+    },
+
+    "audit/export/auditStatus": { 
+        "properties": { 
+            "creation_time": {},
+            "property": {},
+            "Value": {},
+            "school": {},
+            "place_name": {},
+            "school_year": {},
+            "level": {},
+            "owner_n_fn": {}, 
+            "identifier": {},
+            "origine": {},
+            "amount": {},
+            "n_fn": {},
+            "email": {},
+            "tel_cell": {}
+        }
+    }, 
+      	
+	"audit/index/auditOrigine": {
+        "view": "renderIndexB5",
+        "restriction": "property:origine"
+    }, 
+
+	"audit/search/auditOrigine": { 
+        "view": "renderSearchB5",
+        "properties": { 
+            "property": { "multiple": true },
+            "value": {},
+            "school": { "multiple": true },
+            "place_id": { "multiple": true },
+            "school_year": { "multiple": true },
+            "level": { "multiple": true },
+            "owner_id": {},
+            "n_fn": {},
+            "email": {},
+            "tel_cell": {}
+        }
+    },
+	
+	"audit/list/auditOrigine": { 
+        "view": "renderDataviewB5",
+        "measure": "amount",
+        "properties": { 
+            "creation_time": {},
+            "property": { "restriction": ["origine"] },
+            "value": {},
+            "school": {},
+            "school_year": { },
+            "level": {},
+            "amount": {}
+        }
+    },
+
+    "audit/detail/auditOrigine": {
+        "tabs": {
+            "contact_1": {
+                "definition": "inline",
+                "route": "/bo/update/candidat",
+                "labels": {"en_US": "Update", "fr_FR": "Modifier"},
+                "key": "id"
+            },
+            "add": {
+                "definition": "inline",
+                "route": "/bo/add/candidat",
+                "labels": {"en_US": "Add", "fr_FR": "Ajouter"},
+                "key": false
+            }
+        }
+    },
+
+	"audit/update/auditOrigine": {
+        "layout": {
+            "unique": {
+                "properties": ["status", "identifier", "opening_date", "callback_date", "subscription_date", "cancellation_date", "amount"]
+            }
+        },
+        "properties": {
+            "creation_time": { "readonly": true },
+            "property": { "readonly": true },
+            "value": { "readonly": true },
+            "school": { "readonly": true },
+            "place_name": { "readonly": true },
+            "school_year": { "readonly": true },
+            "level": { "readonly": true },
+            "owner_n_fn": { "readonly": true },
+            "identifier": { "readonly": true },
+            "amount": { "readonly": true },
+            "n_fn": { "readonly": true },
+            "email": { "readonly": true },
+            "tel_cell": {}
+        }
+    },
+
+    "audit/export/auditOrigine": { 
+        "properties": { 
+            "creation_time": {},
+            "property": {},
+            "Value": {},
+            "school": {},
+            "place_name": {},
+            "school_year": {},
+            "level": {},
+            "owner_n_fn": {}, 
+            "identifier": {},
+            "amount": {},
+            "n_fn": {},
+            "email": {},
+            "tel_cell": {}
+        }
+    }
+}

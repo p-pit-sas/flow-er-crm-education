@@ -1,0 +1,87 @@
+{  	
+    "headerParams": {
+        "darkMode": true,
+        "logo": "logo-studency.jpg",
+        "logoHeight": "50"
+    },
+
+    "applications": {
+		"admission": {
+			"labels": { "default": "Admission" },
+			"default": "prospect",
+			"defaultRole": "sales_manager"
+        },
+		"admin": {
+			"labels": { "default": "Admin" },
+			"default": "profile"
+        }
+    },
+
+    "menu/admission": {
+        "tabs": ["tab/prospect", "tab/commercial", "tab/marketing", "tab/event", "tab/configView"],
+        "defaultTab": "tab/prospect",
+        "labels": { "default": "Admission" }
+    },
+
+    "tab/prospect": {
+        "menu": "menu/admission",
+        "route": "/bo/index/candidat",
+        "urlParams": "view=prospect",
+        "labels": { "default": "Prospects" }
+    },
+
+    "tab/commercial": {
+        "menu": "menu/admission",
+        "route": "/bo/index/candidat",
+        "urlParams": "view=commercial",
+        "labels": { "default": "Candidats" }
+    },
+
+    "tab/marketing": {
+        "menu": "menu/admission",
+        "route": "/bo/index/candidat",
+        "urlParams": "view=marketing",
+        "labels": { "default": "Campagnes" }
+    },
+
+    "tab/event": {
+        "menu": "menu/admission",
+        "route": "/bo/index/event",
+        "urlParams": "view=event",
+        "labels": { "default": "Calendrier" }
+    },
+
+    "tab/configView": {
+        "menu": "menu/admission",
+        "route": "/bo/index/config",
+        "urlParams": "view=configView",
+        "labels": { "default": "Views", "fr_FR": "Vues" }
+    },
+
+    "tab/candidatAudit": {
+        "menu": "menu/admin",
+        "route": "/bo/index/audit",
+        "urlParams": "view=auditCandidat",
+        "labels": { "default": "Audit candidats" }
+    },
+
+    "menu/bi": {
+        "tabs": ["tab/auditStatus", "tab/auditOrigine"],
+        "defaultTab": "tab/auditStatus",
+        "labels": { "default": "BI" }
+    },
+
+    "tab/auditStatus": {
+        "menu": "menu/bi",
+        "route": "/bo/index/audit",
+        "urlParams": "view=auditStatus",
+        "labels": { "default": "Status" }
+    },
+
+    "tab/auditOrigine": {
+        "menu": "menu/bi",
+        "route": "/bo/index/audit",
+        "urlParams": "view=auditOrigine",
+        "labels": { "default": "Origine" }
+    }
+}

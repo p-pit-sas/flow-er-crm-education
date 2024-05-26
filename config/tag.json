@@ -1,0 +1,25 @@
+{
+    "tag/model": {
+        "entities": {},
+        "properties": {
+            "id": { "entity": "tag", "column": "id" },
+            "status": { "entity": "tag", "column": "status" },
+            "name": { "entity": "tag", "column": "name" },
+            "vector": { "entity": "tag", "column": "vector" },
+            "category": { "entity": "tag", "column": "category" }
+        }
+    },
+
+    "tag/property/category": {
+        "definition": "inline",
+        "type": "select",
+        "modalities": {
+            "ecole": { "default": "School", "fr_FR": "École" },
+            "campus": { "default": "Campus", "fr_FR": "Campus" }
+        },
+        "labels": {
+            "default": "Category",
+            "fr_FR": "Catégorie"
+        }
+    }
+}
