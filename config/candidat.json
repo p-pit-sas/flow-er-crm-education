@@ -914,6 +914,26 @@
                 ]
             },
             "school": {},
+            "place_id": {},
+            "school_year": { },
+            "level": {},
+            "owner_n_fn": {},
+            "n_fn": { "detailCaption": true },
+            "email": {},
+            "tel_cell": {},
+            "wish_school": {},
+            "next_meeting_date": {},
+            "subscription_date": {},
+            "amount": {}
+        }
+    },
+	
+	"candidat/list/marketing": { 
+        "view": "renderDataviewB5",
+        "measure": "amount",
+        "properties": { 
+            "status": {},
+            "school": {},
             "place_name": {},
             "school_year": { },
             "level": {},
@@ -927,8 +947,7 @@
         }
     },
 	
-	"candidat/list/marketing": { 
-        "view": "renderDataviewB5",
+	"candidat/view/marketing": { 
         "measure": "amount",
         "properties": { 
             "status": {},
