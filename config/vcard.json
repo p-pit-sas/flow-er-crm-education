@@ -21,10 +21,9 @@
             "gender": { "entity": "vcard", "column": "gender", "type": "int" },
             "nationality": { "entity": "vcard", "column": "nationality", "type": "tinyint" },
 
-            "creation_time": { "entity": "vcard", "column": "creation_time", "type": "datetime" },
-            "creation_user": { "entity": "vcard", "column": "creation_user", "type": "int" },
-            "update_time": { "entity": "vcard", "column": "update_time", "type": "datetime" },
-            "update_user": { "entity": "vcard", "column": "update_user", "type": "int" }
+            "visibility": { "entity": "vcard", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "vcard", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "vcard", "column": "touched_by", "type": "int" }
        }
     }
 }

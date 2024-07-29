@@ -13,8 +13,9 @@
             "creation_user": { "entity": "contact", "column": "creation_user", "type": "int" },
             "user_n_fn": { "entity": "user", "column": "n_fn" },
 
-            "update_time": { "entity": "contact", "column": "update_time", "type": "datetime" },
-            "update_user": { "entity": "contact", "column": "update_user", "type": "int" }
+            "visibility": { "entity": "contact", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "contact", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "contact", "column": "touched_by", "type": "int" }
        }
     }
 }

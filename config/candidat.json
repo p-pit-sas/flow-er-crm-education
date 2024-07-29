@@ -72,10 +72,9 @@
             "transfer_order_date": { "entity": "candidat", "column": "transfer_order_date", "type": "date" },
             "bank_identifier": { "entity": "candidat", "column": "bank_identifier" },
 
-            "creation_time": { "entity": "candidat", "column": "creation_time", "type": "datetime" },
-            "creation_user": { "entity": "candidat", "column": "creation_user", "type": "int" },
-            "update_time": { "entity": "candidat", "column": "update_time", "type": "datetime" },
-            "update_user": { "entity": "candidat", "column": "update_user", "type": "int" }
+            "visibility": { "entity": "candidat", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "candidat", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "candidat", "column": "touched_by", "type": "int" }
         }
     },
 
@@ -732,7 +731,7 @@
 		}
     },
     
-    "candidat/property/update_time": {
+    "candidat/property/touched_at": {
 		"definition": "inline",
 		"type": "datetime",
 		"labels": {
@@ -772,7 +771,11 @@
     },
 		
 	"candidat/index/prospect": {
-        "listView": "columns",
+        "header": "/bo/cli/bootstrap/renderHeader.js",
+        "body": "/bo/cli/bootstrap/renderBody.js",
+        "menu": "/bo/cli/bootstrap/renderMenu.js",
+        "footer": "/bo/cli/bootstrap/renderFooter.js",
+        "listView": "/dashboard/columns",
         "restriction": "status:new,repondeur,a_relancer,candidate"
     }, 
 	
@@ -784,7 +787,7 @@
     }, 
 
 	"candidat/count/marketing": {
-		"new_j-1": { "filters": { "status": "new" }, "labels": { "default": "Nouveau J-1" } }
+		"newJm1": { "filters": { "status": "new" }, "labels": { "default": "Nouveau J-1" } }
     },
 
 	"candidat/search/prospect": { 
@@ -947,7 +950,7 @@
         }
     },
 	
-	"candidat/view/marketing": { 
+	"candidat/view/default": { 
         "measure": "amount",
         "properties": { 
             "status": {},
@@ -1026,7 +1029,7 @@
             }
         },
         "properties": {
-            "update_time": { "consistency": true },
+            "touched_at": { "consistency": true },
             "status": { "mandatory": true },
             "school": { "mandatory": true },
             "place_id": { "mandatory": true },
@@ -1147,6 +1150,42 @@
             "school_year": { "class": "col-lg-12", "required": true },
             "nationality": { "class": "col-lg-12", "required": true },
             "contacts": { "class": "col-lg-12", "required": true }
+        }
+    },
+
+    "candidat/automation/default": {
+        "nouveau": {
+            "filters": { 
+                "status": "new",
+                "callback_date": ["<=", "today-4"]
+            },
+            "toSend": [
+                {
+                    "channel": "email",
+                    "object": {
+                        "default": "Inscrivez-vous au concours Flow-ER Learning"
+                    },
+                    "text": {
+                        "default": "%s, donnez un sens à vos études en vous inscrivant au concours Flow-ER Learning. Cliquez ici https://flow-er.fr/lrn/cb/%s",
+                        "params": ["n_first", "id"]
+                    },
+                    "sender": { "default": "Flow-ER Learning", "email": "contact@flow-er.fr" }
+                },
+                {
+                    "channel": "sms",
+                    "text": {
+                        "default": "Donnez un sens à vos études en vous inscrivant au concours Flow-ER Learning. Cliquez ici https://flow-er.fr/lrn/cb/%s",
+                        "params": ["id"]
+                    },
+                    "sender": { "default": "Flow-ER Learning" }
+                }
+            ],
+            "comment": { 
+                "default": "Email + SMS auto \"Nouveau < J\""
+            },
+            "update": {
+                "callback_date": "today"
+            }
         }
     }
 }

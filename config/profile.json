@@ -12,10 +12,9 @@
             "equipe": { "entity": "profile", "column": "equipe" },
             "role": { "entity": "profile", "column": "role" },
 
-            "creation_time": { "entity": "profile", "column": "creation_time", "type": "datetime" },
-            "creation_user": { "entity": "profile", "column": "creation_user", "type": "int" },
-            "update_time": { "entity": "profile", "column": "update_time", "type": "datetime" },
-            "update_user": { "entity": "profile", "column": "update_user", "type": "int" }
+            "visibility": { "entity": "profile", "column": "visibility", "audit": true },
+            "touched_at": { "entity": "profile", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "profile", "column": "touched_by", "type": "int" }
        }
     },
 

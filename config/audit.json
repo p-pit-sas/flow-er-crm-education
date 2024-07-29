@@ -34,11 +34,8 @@
             "email": { "entity": "contact_1", "column": "email" },
             "tel_cell": { "entity": "contact_1", "column": "tel_cell" },
 
-            "creation_time": { "entity": "audit", "column": "creation_time", "type": "datetime" },
-            "creation_date": { "entity": "audit", "column": "creation_date", "type": "date" },
-            "creation_month": { "entity": "audit", "column": "creation_month" },
-            "creation_year": { "entity": "audit", "column": "creation_yeat" },
-            "creation_user": { "entity": "audit", "column": "creation_user", "type": "int" }
+            "touched_at": { "entity": "contact_1", "column": "touched_at", "type": "datetime" },
+            "touched_by": { "entity": "contact_1", "column": "touched_by", "type": "int" }
        }
     },
 
@@ -326,7 +323,7 @@
         }
     },
 
-    "audit/property/creation_time": {
+    "audit/property/touched_at": {
         "definition": "inline",
         "type": "datetime",
         "labels": {
@@ -361,7 +358,7 @@
         "view": "renderDataviewB5",
         "measure": "amount",
         "properties": { 
-            "creation_time": {},
+            "touched_at": {},
             "property": { "restriction": ["status"] },
             "value": {},
             "school": {},
@@ -395,7 +392,7 @@
             }
         },
         "properties": {
-            "creation_time": { "readonly": true },
+            "touched_at": { "readonly": true },
             "property": { "readonly": true },
             "value": { "readonly": true },
             "school": { "readonly": true },
@@ -414,7 +411,7 @@
 
     "audit/export/auditStatus": { 
         "properties": { 
-            "creation_time": {},
+            "touched_at": {},
             "property": {},
             "Value": {},
             "school": {},
@@ -456,7 +453,7 @@
         "view": "renderDataviewB5",
         "measure": "amount",
         "properties": { 
-            "creation_time": {},
+            "touched_at": {},
             "property": { "restriction": ["origine"] },
             "value": {},
             "school": {},
@@ -490,7 +487,7 @@
             }
         },
         "properties": {
-            "creation_time": { "readonly": true },
+            "touched_at": { "readonly": true },
             "property": { "readonly": true },
             "value": { "readonly": true },
             "school": { "readonly": true },
@@ -508,7 +505,7 @@
 
     "audit/export/auditOrigine": { 
         "properties": { 
-            "creation_time": {},
+            "touched_at": {},
             "property": {},
             "Value": {},
             "school": {},
