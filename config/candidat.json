@@ -175,6 +175,8 @@
         "definition": "inline",
         "type": "select",
         "modalities": {
+            "bts_1": { "fr_FR": "BTS 1" },
+            "bts_2": { "fr_FR": "BTS 2" },
             "b1": { "fr_FR": "Bachelor 1" },
             "b2": { "fr_FR": "Bachelor 2" },
             "b3": { "fr_FR": "Bachelor 3" },
@@ -771,11 +773,9 @@
     },
 		
 	"candidat/index/prospect": {
-        "header": "/bo/cli/bootstrap/renderHeader.js",
-        "body": "/bo/cli/bootstrap/renderBody.js",
-        "menu": "/bo/cli/bootstrap/renderMenu.js",
-        "footer": "/bo/cli/bootstrap/renderFooter.js",
-        "listView": "/dashboard/columns",
+        "bodyRenderer": "renderBody10",
+        "searchRenderer": "renderSearch",
+        "listRenderer": "renderColumns",
         "restriction": "status:new,repondeur,a_relancer,candidate"
     }, 
 	
@@ -790,26 +790,7 @@
 		"newJm1": { "filters": { "status": "new" }, "labels": { "default": "Nouveau J-1" } }
     },
 
-	"candidat/search/prospect": { 
-        "properties": { 
-            "status": { 
-                "multiple": true,
-                "options": ["new", "repondeur", "a_relancer", "candidate", "non_qualifie", "ne_plus_contacter", "black_liste"]
-            },
-            "school": { "multiple": true },
-            "place_id": { "multiple": true },
-            "school_year": { "multiple": true },
-            "level": { "multiple": true },
-            "owner_id": { "multiple": true },
-            "n_fn": { "completion": { "where": "new,repondeur,a_relancer,candidate,non_qualifie,ne_plus_contacter,black_liste" } },
-            "email": {},
-            "tel_cell": {},
-            "callback_date": {},
-            "next_meeting_date": {}
-        }
-    },
-
-	"candidat/search/commercial": { 
+    "candidat/search/commercial": { 
         "properties": { 
             "status": { 
                 "multiple": true,
@@ -866,12 +847,7 @@
         }
     },
 	
-	"candidat/columns/prospect": { 
-        "distribution": {
-            "variable": "status",
-            "modalities": "new,repondeur,a_relancer,candidate",
-            "sum": "amount"
-        },
+	"candidat/list/prospect": { 
         "properties": {
             "status": {
                 "restriction": ["new", "repondeur", "a_relancer", "candidate"]
@@ -881,19 +857,26 @@
             "school_year": { },
             "level": {},
             "amount": {},
-            "n_fn": {},
+            "n_fn": { "completion": true },
             "email": {},
             "tel_cell": {},
             "next_meeting_date": {},
             "subscription_date": {}
         },
+        "distribution": {
+            "variable": "status",
+            "modalities": "new,repondeur,a_relancer,candidate",
+            "sum": "amount"
+        },
+        "title": [
+            { "format": "<h5 class=\"card-title mb-0\">%s</h5>", "params": "n_fn" }
+        ],
         "layout": [ 
-            { "format": "<h5 class=\"card-title\">%s</h5>", "params": "n_fn" },
             { "format": "<h6 class=\"card-subtitle mb-2 text-muted\">%s | %s</h6>", "params": "school,place_name" },
             { "format": "<h6 class=\"card-subtitle mb-2 text-muted\">%s</h6>", "params": "level" },
             { "modalities": "candidate", "format": "<p class=\"card-text\">Rendez-vous le %s</p>", "params": "next_meeting_date" },
-            { "format": "<a href=\"mailto: %s\" class=\"card-link\">%s</a>", "params": "email,email" },
-            { "format": "<a href=\"phone: %s\" class=\"card-link\">%s</a>", "params": "tel_cell,tel_cell" }
+            { "format": "%s", "params": "email" },
+            { "format": "%s", "params": "tel_cell" }
         ]
     },
 	

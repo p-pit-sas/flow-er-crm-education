@@ -185,6 +185,8 @@
         "definition": "inline",
         "type": "select",
         "modalities": {
+            "bts_1": { "fr_FR": "BTS 1" },
+            "bts_2": { "fr_FR": "BTS 2" },
             "b1": { "fr_FR": "Bachelor 1" },
             "b2": { "fr_FR": "Bachelor 2" },
             "b3": { "fr_FR": "Bachelor 3" },

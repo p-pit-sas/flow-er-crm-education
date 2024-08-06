@@ -27,7 +27,8 @@
         "menu": "menu/admission",
         "route": "/bo/index/candidat",
         "urlParams": "view=prospect",
-        "labels": { "default": "Prospects" }
+        "labels": { "default": "Prospects" },
+        "darkMode": true
     },
 
     "tab/commercial": {
